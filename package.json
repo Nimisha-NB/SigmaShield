@@ -1,0 +1,44 @@
+{
+  "name": "sigmashield",
+  "displayName": "Sigmashield",
+  "description": "security buddy",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.extractApiKey",
+        "title": "Edit .env"
+      },
+      {
+        "command": "extension.hideApiKey",
+        "title": "Hide .env"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.100.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "eslint": "^9.25.1",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.5.2"
+  },
+  "dependencies": {
+    "pngjs": "^7.0.0"
+  }
+}
