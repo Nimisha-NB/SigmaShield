@@ -31,27 +31,32 @@ def fuzzy_search_in_file(file_path, target_snippet, min_score=60):
 
     return False  # No good match in this file
 
-def fuzzy_search_in_folder(folder_path, target_snippet, min_score=60):
+def global_fuzzy_search(target_snippet, min_score=60):
+    print("GFUZ")
+    # folder_path = os.getcwd()
+    folder_path = os.getcwd()
     folder = Path(folder_path)
 
     for file_path in folder.rglob("*.py"):
+        if('fuzzysearch.py' in str(file_path) or 'venv' in str(file_path)):
+            continue
         found = fuzzy_search_in_file(file_path, target_snippet, min_score)
         if found:
-            return  # Early return on first match
+            return True # Early return on first match
 
     print("❌ No matching code snippet found in any file.")
+    return False
 
 # 🧪 Example usage
-fuzzy_search_in_folder(
-    os.getcwd(),  # <- 🔁 Replace with your actual folder path
-    """
-def block(self, flow: http.HTTPFlow, reason: str):
-    print(f"{reason} Blocking request to {flow.request.url}.")
-    flow.response = http.Response.make(
-        403,
-        b"Request blocked: " + reason.encode(),
-        {"Content-Type": "text/plain"}
-    )
-    """,
-    min_score=70
-)
+# fuzzy_search_in_folder(
+#     """
+# def block(self, flow: http.HTTPFlow, reason: str):
+#         print(f"{reason} Blocking request to {flow.request.url}.")
+#         flow.response = http.Response.make(
+#             403,
+#             b"Request blocked: " + reason.encode(),
+#             {"Content-Type": "text/plain"}
+#         )
+#     """,
+#     min_score=70
+# )

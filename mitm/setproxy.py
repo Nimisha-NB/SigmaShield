@@ -40,8 +40,32 @@ def set_mac_proxy(network_service, proxy_host, proxy_port):
     except subprocess.CalledProcessError as e:
         print(f"❌ Failed to set proxy: {e}")
 
-set_mac_proxy(
-    "Wi-Fi",       # or "Ethernet" or your network service name
-    "127.0.0.1",   # proxy host
-    8080           # proxy port
-)
+
+def reset_mac_proxy(network_service):
+    try:
+        # Disable Web Proxy (HTTP)
+        subprocess.run([
+            "networksetup",
+            "-setwebproxystate",
+            network_service,
+            "off"
+        ], check=True)
+
+        # Disable Secure Web Proxy (HTTPS)
+        subprocess.run([
+            "networksetup",
+            "-setsecurewebproxystate",
+            network_service,
+            "off"
+        ], check=True)
+
+        print("✅ Proxy settings reset successfully.")
+
+    except subprocess.CalledProcessError as e:
+        print(f"❌ Failed to reset proxy: {e}")
+
+# set_mac_proxy(
+#     "Wi-Fi",       # or "Ethernet" or your network service name
+#     "127.0.0.1",   # proxy host
+#     8080           # proxy port
+# )
