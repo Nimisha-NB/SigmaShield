@@ -14,7 +14,7 @@ def start():
     mitm_process = start_mitm_proxy()  # Start the MITM Proxy
     # Start the AI Models here
 
-def start_mitm_proxy(script_path="./setproxy.py"):
+def start_mitm_proxy(script_path="./proxy.py"):
     try:
         process = subprocess.Popen(
             ["mitmdump", "-s", script_path],
