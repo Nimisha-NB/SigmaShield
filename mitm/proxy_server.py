@@ -1,3 +1,4 @@
+from twitter import handle_twitter
 from mitmproxy import ctx
 import asyncio
 from mitmproxy import http
@@ -43,8 +44,14 @@ class BlockProprietaryRequests:
             self.tasks.add(task)
             task.add_done_callback(self.tasks.discard)
 
-        elif "chatgpt.com" in url and 'conversation' in url:
+        if "chatgpt.com" in url and 'conversation' in url:
             blocked = handle_chatgpt(flow)
+            if blocked:
+                self.block(flow, "COMPANY_CODE_FOUND")
+
+        if 'x.com' in url and 'createtweet' in url:
+            print("AAAA")
+            blocked = handle_twitter(flow)
             if blocked:
                 self.block(flow, "COMPANY_CODE_FOUND")
 
