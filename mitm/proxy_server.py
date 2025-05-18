@@ -1,3 +1,4 @@
+from stackoverflow import handle_stackoverflow
 from twitter import handle_twitter
 from mitmproxy import ctx
 import asyncio
@@ -52,6 +53,11 @@ class BlockProprietaryRequests:
         if 'x.com' in url and 'createtweet' in url:
             print("AAAA")
             blocked = handle_twitter(flow)
+            if blocked:
+                self.block(flow, "COMPANY_CODE_FOUND")
+
+        if 'stackoverflow.com' in url and 'submit' in url:
+            blocked = handle_stackoverflow(flow)
             if blocked:
                 self.block(flow, "COMPANY_CODE_FOUND")
 
