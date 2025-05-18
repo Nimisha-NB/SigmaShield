@@ -48,7 +48,7 @@ def global_fuzzy_search(target_snippet, min_score=60):
     return False
 
 # 🧪 Example usage
-# fuzzy_search_in_folder(
+# global_fuzzy_search(
 #     """
 # def block(self, flow: http.HTTPFlow, reason: str):
 #         print(f"{reason} Blocking request to {flow.request.url}.")
